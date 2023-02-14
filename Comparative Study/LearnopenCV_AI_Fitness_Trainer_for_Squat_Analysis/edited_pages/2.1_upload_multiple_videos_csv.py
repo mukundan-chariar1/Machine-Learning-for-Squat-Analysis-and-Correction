@@ -1,25 +1,35 @@
+## This code eliminates streamlit as the medium, and is able to accept multiple videos as an input in the form of a csv. It writes extracted data to a csv file
+
+
+
 import csv
-import time
-import tempfile
 import cv2
-import numpy as np
 import os
-import av
 import sys
-
-BASE_DIR = os.path.abspath(os.path.join(__file__, '../../'))
-sys.path.append(BASE_DIR)
-
-path_data='/home/mukundan/Desktop/VIII SEM/Data/Countix'
-path_csv='/home/mukundan/Desktop/VIII SEM/Data/CSV_output'
-
-fieldnames=['state_seq','start_inactive_time','start_inactive_time_front','INACTIVE_TIME','INACTIVE_TIME_FRONT','DISPLAY_TEXT','COUNT_FRAMES','LOWER_HIPS','INCORRECT_POSTURE','prev_state','curr_state','SQUAT_COUNT','IMPROPER_SQUAT']
-
+import pandas as pd
 from utils import get_mediapipe_pose
 from process_frame_edited import ProcessFrame
 from thresholds import get_thresholds_beginner, get_thresholds_pro
 
-thresholds=get_thresholds_beginner()
+BASE_DIR = os.path.abspath(os.path.join(__file__, '../../'))
+sys.path.append(BASE_DIR)
+
+path_data='/home/mukundan/Desktop/VIII SEM/Data/Test' #change the path here
+path_csv='/home/mukundan/Desktop/VIII SEM/Data/CSV_output' #change the path here
+
+fieldnames=['state_seq','start_inactive_time','start_inactive_time_front','INACTIVE_TIME','INACTIVE_TIME_FRONT','DISPLAY_TEXT','COUNT_FRAMES','LOWER_HIPS','INCORRECT_POSTURE','prev_state','curr_state','SQUAT_COUNT','IMPROPER_SQUAT']
+
+
+thresholds = None 
+
+mode='Beginner' #for our convenience, we have used thresholds as beginner
+
+if mode == 'Beginner':
+    thresholds = get_thresholds_beginner() 
+
+elif mode == 'Pro':
+    thresholds = get_thresholds_pro()
+
 
 upload_process_frame = ProcessFrame(thresholds=thresholds)
 
@@ -30,17 +40,24 @@ output_video_file = f'output_recorded.mp4'
 if os.path.exists(output_video_file):
     os.remove(output_video_file)
 
+##reading the csf input file
 
-import pandas as pd
-
-reader=pd.read_csv("placeholder_csv.csv")
+reader=pd.read_csv("input_csv.csv")
 df=pd.DataFrame(reader)
 placeholder=reader["name"].tolist()
 print(placeholder)
-i=0
+
+##initialising the cv2 module
+
 vid=cv2.VideoCapture()
+
+
 for file in placeholder:
 
+    #reset the state tracker to its initial value
+    upload_process_frame.reset_state_tracker()
+
+    #create a file with the input files name as its name
     filename = file+'.csv'
     with open(os.path.join(path_csv, filename), 'w') as csvfile:
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -59,13 +76,15 @@ for file in placeholder:
             # -----------------------------------------------------------------------------
 
             if(vid.isOpened()==False):
-                print("error video not open")
+                print("Error video not open")
             while(vid.isOpened()):
                 ret, frame=vid.read()
                 if(ret==True):
                     cv2.imshow("frame", frame)
                     if(cv2.waitKey(25) & 0xFF == ord('q')):
                         break
+                    elif(cv2.waitKey(25) & 0xFF == ord('p')):
+                        cv2.waitKey(0)
 
                 #convert frame from BGR to RGB before processing it.
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

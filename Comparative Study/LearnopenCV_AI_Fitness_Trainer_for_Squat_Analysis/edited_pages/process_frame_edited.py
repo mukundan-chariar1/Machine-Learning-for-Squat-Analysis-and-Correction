@@ -555,5 +555,29 @@ class ProcessFrame:
     
     def return_state_tracker(self):
         return self.state_tracker
+    
+    def reset_state_tracker(self):
+        self.state_tracker = {
+            'state_seq': [],
 
-                    
+            'start_inactive_time': time.perf_counter(),
+            'start_inactive_time_front': time.perf_counter(),
+            'INACTIVE_TIME': 0.0,
+            'INACTIVE_TIME_FRONT': 0.0,
+
+            # 0 --> Bend Backwards, 1 --> Bend Forward, 2 --> Keep shin straight, 3 --> Deep squat
+            'DISPLAY_TEXT' : np.full((4,), False),
+            'COUNT_FRAMES' : np.zeros((4,), dtype=np.int64),
+
+            'LOWER_HIPS': False,
+
+            'INCORRECT_POSTURE': False,
+
+            'prev_state': None,
+            'curr_state':None,
+
+            'SQUAT_COUNT': 0,
+            'IMPROPER_SQUAT':0
+            
+        }
+    
