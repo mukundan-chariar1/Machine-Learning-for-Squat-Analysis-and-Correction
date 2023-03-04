@@ -14,19 +14,19 @@ The fields of physical rehabilitation, physiotherapy and athletic coaching can i
 ### 1.3 Project overview
     1. Created 10 bad form squat videos and 10 good form squat videos, each about 2-3 seconds, at 
     1080p and 60 fps (example below):
-![](./../media/gf_1.gif)
+![](media/gf_1.gif)
 
     2. Used photoshop to add noise and distort the original 20 videos to create 200 videos. The videos
     were then titled gf_x.mp4 or bf_x.mp4 where gf/bf are the good/bad form labels (examples below):
-![](./../media/gf_n_1.gif)
-![](./../media/gf_s_1.gif)
+![](media/gf_n_1.gif)
+![](media/gf_s_1.gif)
 
     3. Fed these videos into the support neural network to create a dataset that contained only the essential 
     information (example of output below):
-![](./../media/gf_1_lq.gif)
+![](media/gf_1_lq.gif)
 
     4. Used the pose estimation videos to train the main neural network (network architecutre pictured below):
-![](./../results1/model.png)
+![](results1/model.png)
 
     5. Compared the predictions of the model with the true labels.
 
@@ -106,25 +106,25 @@ Make sure to use pose estimation videos using demo_video_edited.py
 ### 4.1 Model learned quickly
 
 Despite only using 55 videos to train the main model, the model was able to learn the patterns fast:
-![](./../results1/model_accuracy.png)
-![](./../results1/model_losses.png)
+![](results1/model_accuracy.png)
+![](results1/model_losses.png)
 
 ### 4.2 Predictions are better than the baseline but aren't great
 
 The model does have a tendency to overpredict the good form probabilities for each video submitted
-![](./../results1/cm_plain.png)
-![](./../results1/cm_norm.png)
-![](./../results1/roc_auc.png)
+![](results1/cm_plain.png)
+![](results1/cm_norm.png)
+![](results1/roc_auc.png)
 
 ### 4.3 Probability distribution insights
 
 Probabilities generated for good form videos are much less varied than the probabilites generated for bad form videos.
 This means that the model can pick up on the characteristics of a good form versus a bad form.
 
-![](./../results1/bb.png)
-![](./../results1/bg.png)
-![](./../results1/gb.png)
-![](./../results1/gg.png)
+![](results1/bb.png)
+![](results1/bg.png)
+![](results1/gb.png)
+![](results1/gg.png)
 
 ## 5 Conclusions of the Comparative Study
 
