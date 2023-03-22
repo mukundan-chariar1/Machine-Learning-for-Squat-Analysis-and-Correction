@@ -32,7 +32,7 @@ SHOW COLUMNS FROM challengetbl;
 ```
 ### Templates
 
-The edited nd translated templates are under/edited/templates. These are used for the flask implementation of the code.
+The edited nd translated templates are under/edited/templates. These are used for the flask implementation of the code. Make sure you unzip templates.zip and static.zip and keep it in the same folder as the main code.
 
 # README new
 
