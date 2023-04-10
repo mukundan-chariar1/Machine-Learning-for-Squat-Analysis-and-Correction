@@ -1,39 +1,41 @@
-# Machine-Learning-for-Squat-Analysis-and-Correction
+**Real time 3D body pose estimation using MediaPipe**
 
-A squat is defined as an exercise in which a standing person lowers to a position in which the torso is erect and the knees are deeply bent and then returns to its original upright position. Squats are one of the most nuanced exercises. Each person will have a different type of squat as different individuals having their own unique length of limbs will cause their form to vary when observed. We also see that the mobility of different joints contributes to this, as well as the strength of their muscles. To assess  each  person  uniformly  and  fairly,  we  introduce  our  model  that  takesinto  consideration  the relative distance travelled of each significant joint of their bodies to move such that they achieve their own  version  of  a  perfect  squat.  Hence  in  this  project  we  plan  to  use  machine  learning  to  analyze whether  the  person  doing  thequat  is  doing  to  the  best  of  their  abilities  according  to  their  body proportions. If there is room for improvement, then we attempt to identify where they can improve by visually showing the trainee their position versus their ideal position.
+This is a demo on how to obtain 3D coordinates of body keypoints using MediaPipe and two calibrated cameras. Two cameras are required as there is no way to obtain global 3D coordinates from a single camera. For camera calibration, my package on github [stereo calibrate](https://github.com/TemugeB/python_stereo_camera_calibrate), my blog post on how to stereo calibrate two cameras: [link](https://temugeb.github.io/opencv/python/2021/02/02/stereo-camera-calibration-and-triangulation.html). Alternatively, follow the camera calibration at Opencv documentations: [link](https://docs.opencv.org/3.4/d9/d0c/group__calib3d.html). If you want to know some details on how this code works, take a look at my accompanying blog post here: [link](https://temugeb.github.io/python/computer_vision/2021/06/27/handpose3d.html).
 
-The goal ofthis project is to analyze people's form while performing squats and compare it to the ideal form of squats according to their body type. The aim is to help beginners correct and monitor their form to improve their progress. To achieve this, the project will use python and its libraries such as TensorFlow, PyTesseract and other machine vision modules. The project builds on existing work in  the  field  of  machine  vision  using  MATLAB  to  recognize  and  perform  motion  analysis  of compound exercises. The expected outcome of this project is to create a  program or interface that can take a video as an input and give an output as a video with the skeleton of the ideal squat. This will enable beginners to monitor their form and improve their progress in squat exercises.
+![input1](media/cam0_kpts.gif "input1") ![input2](media/cam1_kpts.gif "input2") 
+![output](media/pose2.gif "output")
 
-# Stereo Vision module
-We use a Stereo vision calibration  module from Temuge Batpurev: https://github.com/TemugeB/python_stereo_camera_calibrate along with a pose estimation module that uses stereo vision from the same author: https://github.com/TemugeB/bodypose3d. They have been edited to our specifications. 
+**MediaPipe**  
+Install mediapipe in your virtual environment using:
+```
+pip install mediapipe
+```
 
-Stereo Vision is defined as the process of extracting 3D information from digital images taken by two cameras displaced horizontally from one another to obtain two different views of the same scene. We use stereo vision in this project in order to obtain more accurate pose information. We use a pair of Intel RealSense D435 Depth cameras. We mainly use the RGB module of the cameras. The mounts for the cameras were specifically 3D printed along with the mounting screws. The f3d and the stl file shall be made available on this page. 
+**Requirements**  
+```
+Mediapipe
+Python3.8
+Opencv
+matplotlib
+```
 
-Attach the cameras individually and check which video feed has the cameras linked to it by using the command:
+**Usage: Getting real time 3D coordinates**  
+As a demo, I've included two short video clips and corresponding camera calibration parameters. Simply run as:
 ```
-ls /dev/video*
+python bodypose3d.py
 ```
-In calibration_settings.yaml, change the camera numbers for camera0 and camera1, and the resolution in frame_width and frame_height to your cameras properties. Change the checkerboard_rows and checkerboard_columns as well, along with checkerboard_box_size_scale. 
+If you want to use webcam, call the program with camera ids. For example, cameras registered to 0 and 1:
+```
+python bodypose3d.py 0 1
+```
+Make sure the corresponding camera parameters are also updated for your cameras in ```camera_parameters``` folder. My cameras were calibrated to 720px720p. The code crops the input image to this size. If your cameras are calibrated to a different resolution, make sure to change the code to your camera calibration. Also, if your cameras are different aspect ratios (i.e. 16:10, 16:9 etc), then remove the cropping calls in the code. Mediapipe crops your images and resizes them so it doesn't care if youre cameras are calibrated to 1080p, 720p or any other resolution. 
 
-To calibrate the cameras, run the command:
-```
-python calib_test.py calibration_settings.yaml
-```
-Before running this command, make sure all the steps that are necessary are uncommented. You can load a previous calibration as well. 
+The 3D coordinate in each video frame is recorded in ```frame_p3ds``` parameter. Use this for real time application. The keypoints are indexed as below image. More keypoints can be added by including their ids at the top of the file. If keypoints are not found, then the keypoints are recorded as (-1, -1, -1). **Warning**: The code also saves keypoints for all previous frames. If you run the code for long periods, then you will run out of memory. To fix this, remove append calls to: ```kpts_3d, kpts_cam0. kpts_cam1```. When you press the ESC key, body keypoints detection will stop and three files will be saved to disk. These contain recorded 2D and 3D coordinates. 
 
-Copy and paste the camera parameters into /bodypose3d/camera_parameters, then to record a video run the command:
+![output](media/keypoints_ids.png "keypoint_ids")
+
+**Usage: Viewing 3D coordinates**  
+The ```bodypose3d.py``` program creates a 3D coordinates file: ```kpts_3d.dat```. To view the recorded 3D coordinates, simply call:
 ```
-python stereo_recorder.py
-```
-To convert stereo recordings into pose data, run the command:
-```
-python bodypose3d.py <file name here>
-```
-Or if you want to convert all previously unconverted videos into pose data:
-```
-python bodypose3d.py seq
-``` 
-To view the pose data in skeleton format:
-```
-python show_3d_pose.py <file name here>
+python show_3d_pose.py
 ```
