@@ -128,8 +128,8 @@ We use a bidirectional LSTM model to classify the squats. The use of a bidirecti
 
 To train and test the model, run the `seq_classifier.ipynb` notebook. The notebook generates the confusion matrix for the classifier as well. Shown below are the confusion matrices for the same. The graphs for accuracy, val_accuracy and loss, val_loss over epochs is generated as well. 
 
-<img src='/media/LSTM_092/confusion_matrix_LSTM.png' width='50%' height='50%'> <img src='/media/LSTM_092/confusion_matrix_normalized_LSTM.png' width='50%' height='50%'>
-<img src='/media/LSTM_092/model_accuracy_LSTM.png' width='50%' height='50%'> <img src='/media/LSTM_092/model_loss_LSTM.png' width='50%' height='50%'>
+<img src='/media/LSTM_092/confusion_matrix_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/confusion_matrix_normalized_LSTM.png' width='50%' height='50%'>
+<img src='/media/LSTM_092/model_accuracy_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/model_loss_LSTM.png' width='50%' height='50%'>
 
 The classifier is trained for a 1000 epochs with a learning rate of 0.001. The dropout layers are inserted with a coefficient of 0.2 in order to prevent overtraining. The callbacks given to this model are model_checkpoint, which saves the best model so far. We chose to save the best validation accuracy. 
 
