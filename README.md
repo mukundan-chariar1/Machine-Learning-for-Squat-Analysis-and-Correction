@@ -106,8 +106,8 @@ Currently, our dataset comprises 1292 videos. The visualization for the data is 
 |powerlifting squat| 227|
 | total| 1292|
 
-<img src='/media/data_pie.png' width='50%' height='50%'>
-<img src='/media/data_bars.png' width='50%' height='50%'>
+<img src='/media/data_pie.png' width='100%' height='100%'>
+<img src='/media/data_bars.png' width='100%' height='100%'>
 
 ## 3.1 Data Collection and Conversion
 
