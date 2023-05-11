@@ -24,8 +24,7 @@ python calib_test.py calibration_settings.yaml
 ```
 Before running this command, make sure all the steps that are necessary are uncommented. You can load a previous calibration as well. 
 
-<img src='/media/camera0_0_single.png' width='25%' height='25%'> 
-<img src='/media/camera0_0.png' width='25%' height='25%'> <img src='/media/camera1_0.png' width='25%' height='25%'>
+<img src='/media/camera0_0_single.png' width='25%' height='25%'><img src='/media/camera0_0.png' width='25%' height='25%'><img src='/media/camera1_0.png' width='25%' height='25%'>
 
 ## 2.2 Recording Videos in Stereo
 
