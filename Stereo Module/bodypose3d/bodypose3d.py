@@ -201,8 +201,8 @@ if __name__ == '__main__':
     elif len(sys.argv) == 2 :
         path_saved=os.path.join(path_vids, sys.argv[1])
         vids=os.listdir(path_saved)
-        input_stream1 = os.path.join(path_saved, str(vids[0]))
-        input_stream2 = os.path.join(path_saved, str(vids[1]))
+        input_stream1 = os.path.join(path_saved, 'cam0.avi')
+        input_stream2 = os.path.join(path_saved, 'cam1.avi')
 
 
     #get projection matrices
@@ -226,8 +226,8 @@ if __name__ == '__main__':
         if key & 0xFF == ord('y'):
             path_saved=os.path.join(path_vids, input('enter the directory:\n-> '))
             vids=os.listdir(path_saved)
-            input_stream1 = os.path.join(path_saved, str(vids[0]))
-            input_stream2 = os.path.join(path_saved, str(vids[1]))
+            input_stream1 = os.path.join(path_saved, 'cam0.avi')
+            input_stream2 = os.path.join(path_saved, 'cam1.avi')
             continue
         else:
             break

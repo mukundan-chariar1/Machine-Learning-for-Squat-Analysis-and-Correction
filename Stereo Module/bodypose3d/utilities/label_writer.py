@@ -7,7 +7,7 @@ files=os.listdir(path_save)
 for file in files:
 	if not os.path.exists(os.path.join(os.path.join(path_save, file), 'label.txt')):
          with open(os.path.join(os.path.join(path_save, file), 'label.txt'), 'w') as label:
-            label.write("toes lifting")
+            label.write("bending forward")
 
 
    

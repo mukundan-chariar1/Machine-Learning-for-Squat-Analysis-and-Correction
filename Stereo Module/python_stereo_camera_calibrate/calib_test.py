@@ -32,7 +32,7 @@ cmtx0, dist0=cal.load_cam_intrinsics('camera0')
 cmtx1, dist1=cal.load_cam_intrinsics('camera1')
 
 """Step3. Save calibration frames for both cameras simultaneously"""
-#cal.save_frames_two_cams('camera0', 'camera1') #save simultaneous frames
+cal.save_frames_two_cams('camera0', 'camera1') #save simultaneous frames
 
 
 """Step4.A Use paired calibration pattern frames to obtain camera0 to camera1 rotation and translation"""

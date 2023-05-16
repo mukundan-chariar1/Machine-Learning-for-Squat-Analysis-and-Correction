@@ -35,6 +35,12 @@ python stereo_recorder.py
 
 ## 2.3 Converting to Pose Data
 
+Direct Linear Transform (DLT) is a powerful technique in machine vision that enables 3D reconstruction and camera calibration. By utilizing a 2 camera setup, DLT can enhance these tasks and offer improved accuracy and depth perception.
+
+DLT works by establishing correspondences between 3D points in the real world and their corresponding 2D projections in the image plane. The DLT method is based on singular value decomposition (SVD). With a 2 camera setup, two cameras capture the same scene from different viewpoints, providing additional information for depth estimation. Since the DLT method gives us a system of two equations for onr camera view, we must use a pair of cameras (or more) to estimate the world co-ordinates.
+
+To convert videos into pose data, first we extract Landmarks frm the videos using MediaPipe. Then we use the camera parameters and DLT to estimate the world co-ordinates. The pose data is approximated to the real life proportions of the person in the video, compared to MediaPipes normalized data. 
+
 To convert stereo recordings into pose data, run the command:
 ```
 python bodypose3d.py <file name here>
@@ -96,14 +102,14 @@ Currently, our dataset comprises 1292 videos. The visualization for the data is 
 
 |Type| Number|
 |---|---|
-|heels lifting| 158| 
+|heels lifting| 177| 
 |no depth| 182|
-|knees caving| 151|
-|bending forward| 156|
+|knees caving| 152|
+|bending forward| 163|
 |toes lifting| 154|
 |olympic squat| 264|
-|powerlifting squat| 227|
-| total| 1292|
+|powerlifting squat| 240|
+| total| 1332|
 
 <img src='/media/data_pie.png' width='100%' height='100%'>
 <img src='/media/data_bars.png' width='100%' height='100%'>
@@ -131,27 +137,29 @@ To train and test the model, run the `seq_classifier.ipynb` notebook. The notebo
 <img src='/media/LSTM_092/confusion_matrix_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/confusion_matrix_normalized_LSTM.png' width='50%' height='50%'>
 <img src='/media/LSTM_092/model_accuracy_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/model_loss_LSTM.png' width='50%' height='50%'>
 
-The classifier is trained for a 1000 epochs with a learning rate of 0.001. The dropout layers are inserted with a coefficient of 0.2 in order to prevent overtraining. The callbacks given to this model are model_checkpoint, which saves the best model so far. We chose to save the best validation accuracy. 
+The classifier is trained for a 1000 epochs with a learning rate of 0.001. The dropout layers are inserted with a coefficient of 0.2 in order to prevent overtraining. The callbacks given to this model are model_checkpoint, which saves the best model so far. We chose to save the best validation accuracy. The model trained boasts a 92% validation accuracy.
 
-We also visualize each point that is extracted as a 3d graph using `vis_squat.py`. You will have to edit the code a bit in order to view these graphs. 
+We also visualize each point that is extracted as a 3d graph using `squat_estimation/vis_squat.py`. You will have to edit the code a bit in order to view these graphs. 
 
-[comms]: #bs
-    <insert 3d graphs generated here>
+Refer to [graphs.md](graphs.md) to see the 3d curves for each point on the body.
 
 ## 3.3 Estimation of Good Squat
 
 Besides the classification of the given squat, we have also implemented estimation of a good squat, given the first detected set of landmarks via MediaPipe. We have used the approach of fitting a curve for each coordinate for each point of a squat, to each type of good squat. 
 
-    y=mx+c
+y=k<sub>0</sub> + k<sub>1</sub>x + k<sub>2</sub>x<sup>2</sup> + k<sub>3</sub>x<sup>3</sup> + ..... + k<sub>n-1</sub>x<sup>n-1</sup>
 
-The logic begind this is that the curve for a coordinate remains the same, even for different individuals with different limb lengths. Only the constant 'c' varies, hence the original estimate of coordinates is taken as the constant. 
+The logic begind this is that the curve for a coordinate remains the same, even for different individuals with different limb lengths. Only the constant 'k<sub>0</sub>' varies, hence the original estimate of coordinates is taken as the constant. 
 
-[comms]: #bs
-    <insert graphs generated for 0_x, 0_y, 0_z for both cameras, and the curves fit for them>
+Refer to [graphs.md](graphs.md) to see the curves fit.
 
 You will find a few codes under /squat_estimation, these are used the estimate the proper squat for the person. 
 
 To fit a curve to a squat, choose the squat you want to fit to, use `get_landmarks.py` to extract pose data directly from MediaPipe, then edit `curve_fit.py` and run it. It will generate a csv file that you must save under /squat_estimation/csv_coeffs. This contains the coefficients for the curve of the squat. 
+
+In order to estimate the squat, we use scipy.optimize.curve_fit. This allows us to get the curve most appropriate to the person who is squatting. As explained previously, the 'k<sub>0</sub>' value changes for each person. This determines the starting point for coordinate of the squat. The curve is also stretched using simple timescaling, in order to show the comparison effectively. 
+
+First, we extract the Landmarks using MediaPipe, and they are stored as `*landmarks.dat`. Then the starting point for the squat is selected, and the correct squat is estimated. This is saved as `*landmarks_est.dat`. The landmarks are converted to pixel values, and then converted to 3D world co-ordinates and saved as `kpts_3d_est.dat`. This file contains the final correct squat generated for the person, and will be shown side by side with the actual squat done. 
 
 To convert the video of an improper squat into pose data directly extracted from MediaPipe, run: 
 

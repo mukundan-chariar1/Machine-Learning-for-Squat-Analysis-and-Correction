@@ -47,7 +47,7 @@ def visualize_3d(p3ds):
     ax = fig.add_subplot(111, projection='3d')
 
     for framenum, kpts3d in enumerate(p3ds):
-        if framenum%2 == 0: continue #skip every 2nd frame
+        #if framenum%2 == 0: continue #skip every 2nd frame
         for bodypart, part_color in zip(body, colors):
             for _c in bodypart:
                 ax.plot(xs = [kpts3d[_c[0],0], kpts3d[_c[1],0]], ys = [kpts3d[_c[0],1], kpts3d[_c[1],1]], zs = [kpts3d[_c[0],2], kpts3d[_c[1],2]], linewidth = 4, c = part_color)
@@ -71,7 +71,6 @@ def visualize_3d(p3ds):
         ax.set_zlabel('z')
         plt.pause(0.1)
         ax.cla()
-
 
 if __name__ == '__main__':
 

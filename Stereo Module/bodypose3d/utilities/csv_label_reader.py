@@ -35,14 +35,15 @@ print(data)
 courses = list(data.keys())
 values = list(data.values())
   
-fig = plt.figure(figsize = (100, 7))
+fig = plt.figure(figsize = (10, 7))
  
 # creating the bar plot
 #plt.bar(x = courses,y =  values, color ='maroon',
 #        width = 0.4)
-plt.pie(values, labels=courses)
+plt.pie(values, labels=courses, autopct='%1.1f%%')
  
-plt.xlabel("Types of squats")
-plt.ylabel("No. of squats")
+#plt.xlabel("Types of squats")
+#plt.ylabel("No. of squats")
 plt.title("Squat Data")
+plt.savefig('data_pie.png')
 plt.show()

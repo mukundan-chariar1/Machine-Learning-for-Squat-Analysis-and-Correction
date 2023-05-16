@@ -28,7 +28,11 @@ a = np.array(line)
  
 # Creating histogram
 fig, ax = plt.subplots(figsize =(10, 7))
-ax.hist(a, bins = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300])
- 
+ax.hist(a, bins=20)#bins = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300])
+
+plt.xlabel("Data Lengths")
+plt.ylabel("Number of Data")
+plt.title("Data Lengths")
+plt.savefig('data_bars.png')
 # Show plot
 plt.show()
