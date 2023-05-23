@@ -1,5 +1,7 @@
 # Actual vs Estimated Curves
 
+<img src='/media/LSTM_092/model_LSTM.png' width='100%' height='100%'>
+
 ## OLY - Cam0
 
 - 0(0) - Nose
