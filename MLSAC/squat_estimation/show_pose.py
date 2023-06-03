@@ -144,7 +144,7 @@ def visualize_3d_vs(p3ds_act, p3ds_est):
 
         kpts3d_act=kpts3d[0]
         kpts3d_est=kpts3d[1]
-        if framenum%2 == 0: continue #skip every 2nd frame
+        #if framenum%2 == 0: continue #skip every 2nd frame
         for bodypart in body:
             for _c in bodypart:
                 ax.plot(xs = [kpts3d_act[_c[0],0], kpts3d_act[_c[1],0]], ys = [kpts3d_act[_c[0],1], kpts3d_act[_c[1],1]], zs = [kpts3d_act[_c[0],2], kpts3d_act[_c[1],2]], linewidth = 4, c = 'red')
@@ -169,6 +169,8 @@ def visualize_3d_vs(p3ds_act, p3ds_est):
         ax.set_zlabel('z')
         plt.pause(0.1)
     
+        #fig.savefig(f'./imgs/img_{framenum}.png')
+
         ax.cla()
     plt.close()
 

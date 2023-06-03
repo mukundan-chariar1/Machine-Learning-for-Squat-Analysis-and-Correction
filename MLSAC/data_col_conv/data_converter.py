@@ -6,7 +6,7 @@ from tqdm import tqdm
 #path_save='/home/mukundan/Desktop/VIII_SEM/Data/labelled_data/mp/pl/npy/cam1'
 
 path_load='/home/mukundan/Desktop/VIII_SEM/Data/labelled_data/dat_files'
-path_save='/home/mukundan/Desktop/VIII_SEM/Data/labelled_data/npy_files'
+path_save='/home/mukundan/Desktop/VIII_SEM/Data/labelled_data/npy_files_'
 
 data_list=os.listdir(path_load)
 

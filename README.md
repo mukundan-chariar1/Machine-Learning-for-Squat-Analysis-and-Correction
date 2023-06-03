@@ -123,21 +123,54 @@ Under the /data_col_conv folder you will find:
 
 ## 3.2 Classification
 
-We use a bidirectional LSTM model to classify the squats. The use of a bidirectional network allows us to gain more context for the data. The model is composed of:
+We use a bidirectional GRU model to classify the squats. The use of a bidirectional network allows us to gain more context for the data. The model is composed of:
 
-- 3 Bidirectional LSTM layers
+- 3 Bidirectional GRU layers
 - 3 Dropout layers
 - 3 Dense layers 
 - 1 Flatten layer
+- 1 Attention layer
 
-<img src='/media/LSTM_092/model_LSTM.png'>
+<img src='/media/GRU_att_09400/model.png'>
 
 To train and test the model, run the `seq_classifier.ipynb` notebook. The notebook generates the confusion matrix for the classifier as well. Shown below are the confusion matrices for the same. The graphs for accuracy, val_accuracy and loss, val_loss over epochs is generated as well. 
 
-<img src='/media/LSTM_092/confusion_matrix_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/confusion_matrix_normalized_LSTM.png' width='50%' height='50%'>
-<img src='/media/LSTM_092/model_accuracy_LSTM.png' width='50%' height='50%'><img src='/media/LSTM_092/model_loss_LSTM.png' width='50%' height='50%'>
+<img src='/media/GRU_att_09400/confusion_matrix.png' width='50%' height='50%'><img src='/media/GRU_att_09400/confusion_matrix_normalized.png' width='50%' height='50%'>
+<img src='/media/GRU_att_09400/model_accuracy_lstm_8.png' width='50%' height='50%'><img src='/media/GRU_att_09400/model_loss_lstm_8.png' width='50%' height='50%'>
 
 The classifier is trained for a 1000 epochs with a learning rate of 0.001. The dropout layers are inserted with a coefficient of 0.2 in order to prevent overtraining. The callbacks given to this model are model_checkpoint, which saves the best model so far. We chose to save the best validation accuracy. The model trained boasts a 92% validation accuracy.
+
+|Parameter|Value|
+|---|---|
+|Optimizer|adam|
+|Learning Rate|0.001|
+|Epochs|1000|
+|Batch Size|128|
+|Callbacks|model_checkpoint|
+|Metrics|categorical_accuracy|
+|Loss|categorical_crossentropy|
+
+A comparison between 6 models was done, the table is as follows:
+
+|Model Name|Accuracy|
+|---|---|
+|Simple RNN|77.52%|
+|LSTM|85.76%|
+|GRU|83.52%|
+|Simple RNN with Attention|79.77%|
+|LSTM with Attention|92.88%|
+|GRU with Attention|94.00%|
+
+The particular performance of the models is shown here:
+
+|Model Name|BF|HL|KC|ND|OS|PS|TL|
+|---|---|---|---|---|---|---|---|
+|Simple RNN|0.79| 0.94| 0.76| 0.83| 0.81| 0.85| 0.49|
+|LSTM|0.71| 0.97| 0.91| 0.83| 0.94| 0.87| 0.71|
+|GRU|0.75| 0.97| 0.88| 0.89| 0.89| 0.85| 0.61|
+|Simple RNN with Attention| 0.75| 0.97| 1.00| 0.94| 0.73| 0.77| 0.54|
+|LSTM with Attention| 0.79| 0.94| 1.00| 1.00| 0.95| 0.92| 0.85|
+|GRU with Attention| 0.79| 0.97| 1.00| 0.97| 0.94| 0.92| 0.95|
 
 We also visualize each point that is extracted as a 3d graph using `squat_estimation/vis_squat.py`. You will have to edit the code a bit in order to view these graphs. 
 
