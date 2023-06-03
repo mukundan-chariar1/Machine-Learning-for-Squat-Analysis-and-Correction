@@ -8,7 +8,7 @@ The goal of this project is to analyze people's form while performing squats and
 
 We use a Stereo vision calibration  module from Temuge Batpurev: https://github.com/TemugeB/python_stereo_camera_calibrate along with a pose estimation module that uses stereo vision from the same author: https://github.com/TemugeB/bodypose3d. They have been edited to our specifications. 
 
-Stereo Vision is defined as the process of extracting 3D information from digital images taken by two cameras displaced horizontally from one another to obtain two different views of the same scene. We use stereo vision in this project in order to obtain more accurate pose information. We use a pair of Intel RealSense D435 Depth cameras. We mainly use the RGB module of the cameras. The mounts for the cameras were specifically 3D printed along with the mounting screws. The .f3d and the .stl file shall be made available on this page. 
+Stereo Vision is defined as the process of extracting 3D information from digital images taken by two cameras displaced horizontally from one another to obtain two different views of the same scene. We use stereo vision in this project in order to obtain more accurate pose information. We use a pair of Intel RealSense D435 Depth cameras. We mainly use the RGB module of the cameras. The mounts for the cameras were specifically 3D printed along with the mounting screws. The .f3d and the .stl file shall be made available on this page, under /3d_printer. 
 
 ## 2.1 Calibration
 
