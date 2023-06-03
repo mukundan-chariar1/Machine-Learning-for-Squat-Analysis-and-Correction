@@ -174,18 +174,18 @@ The particular performance of the models is shown here:
 
 Accuracy
 
-<img src='/media/RNN_07752/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_accuracy_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_08352/model_accuracy_lstm_8.png' width='33%' height='33%'>
-<img src='/media/RNN_att_07977/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/model_accuracy_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_accuracy_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_07752/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/GRU_08352/model_accuracy_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_att_09288/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_accuracy_lstm_8.png' width='33%' height='33%'>
 
 Loss
 
-<img src='/media/RNN_07752/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_loss_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_08352/model_loss_lstm_8.png' width='33%' height='33%'>
-<img src='/media/RNN_att_07977/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/model_loss_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_loss_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_07752/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/GRU_08352/model_loss_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_att_09288/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_loss_lstm_8.png' width='33%' height='33%'>
 
 Normalized Confusion Matrices
 
 <img src='/media/RNN_07752/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/LSTM_08576/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/GRU_08352/confusion_matrix_normalized.png' width='33%' height='33%'>
-<img src='/media/RNN_att_07977/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/confusion_matrix_normalized.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/confusion_matrix_normalized.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/LSTM_att_09288/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/GRU_att_09400/confusion_matrix_normalized.png' width='33%' height='33%'>
 
 
 
