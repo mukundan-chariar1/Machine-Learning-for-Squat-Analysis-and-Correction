@@ -172,6 +172,24 @@ The particular performance of the models is shown here:
 |LSTM with Attention| 0.79| 0.94| 1.00| 1.00| 0.95| 0.92| 0.85|
 |GRU with Attention| 0.79| 0.97| 1.00| 0.97| 0.94| 0.92| 0.95|
 
+Accuracy
+
+<img src='/media/RNN_07752/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_accuracy_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_08352/model_accuracy_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/model_accuracy_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/model_accuracy_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_accuracy_lstm_8.png' width='33%' height='33%'>
+
+Loss
+
+<img src='/media/RNN_07752/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM_08576/model_loss_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_08352/model_loss_lstm_8.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/model_loss_lstm_8.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/model_loss_lstm_8.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/model_loss_lstm_8.png' width='33%' height='33%'>
+
+Normalized Confusion Matrices
+
+<img src='/media/RNN_07752/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/LSTM_08576/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/GRU_08352/confusion_matrix_normalized.png' width='33%' height='33%'>
+<img src='/media/RNN_att_07977/confusion_matrix_normalized.png' width='33%' height='33%'><img src='/media/LSTM__att_09288/confusion_matrix_normalized.png.png' width='33%' height='33%'><img src='/media/GRU_att_09400/confusion_matrix_normalized.png' width='33%' height='33%'>
+
+
+
+
 We also visualize each point that is extracted as a 3d graph using `squat_estimation/vis_squat.py`. You will have to edit the code a bit in order to view these graphs. 
 
 Refer to [graphs.md](graphs.md) to see the 3d curves for each point on the body.
